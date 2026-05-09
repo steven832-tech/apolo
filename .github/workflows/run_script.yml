@@ -1,0 +1,26 @@
+name: Run Apollo Signup Script
+
+on:
+  workflow_dispatch: # Allows you to run it manually from the "Actions" tab
+  schedule:
+    - cron: '0 0 * * *' # Optional: Runs every day at midnight
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install selenium webdriver-manager
+
+      - name: Run Script
+        run: python apollo_signup.py
